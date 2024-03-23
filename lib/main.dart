@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc/weather_bloc.dart';
 import 'screens/home_screen.dart';
 
 void main() {
@@ -26,7 +28,10 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const HomeScreen(),
+      home: BlocProvider<WeatherBloc>(
+        create: (context) => WeatherBloc()..add(FetchWeatherEvent()),
+        child: const HomeScreen(),
+      ),
     );
   }
 }
